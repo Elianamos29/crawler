@@ -2,24 +2,22 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"os"
 )
 
 func main() {
-	htmlContent := `<html>
-		<head><title>Test</title></head>
-		<body>
-			<a href="https://example.com">Example</a>
-			<a href="/relative-link">Relative</a>
-			<p>Some text <a href="https://another.com">Another</a></p>
-		</body>
-	</html>`
-	urls, err := getURLsFromHTML(htmlContent, "")
-	if err != nil {
-		log.Fatal(err)
+	args := os.Args
+	if len(args) != 2 {
+		if len(args) == 1 {
+			fmt.Println("no website provided")
+			os.Exit(1)
+		} else {
+			fmt.Println("too many arguments provided")
+			os.Exit(1)
+		}
 	}
 
-	for _, url := range urls {
-		fmt.Println(url)
-	}
+	base_url := args[1]
+
+	fmt.Printf("starting crawl of: %s\n", base_url)
 }
