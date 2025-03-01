@@ -20,11 +20,8 @@ func main() {
 	rawBaseURL := args[1]
 
 	fmt.Printf("starting crawl of: %s\n", rawBaseURL)
+	var pages = make(map[string]int)
 
-	htmlBody, err := getHTML(rawBaseURL)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Print(htmlBody)
+	crawlPage(rawBaseURL, rawBaseURL, pages)
+	fmt.Printf("Total crawled pages: %d\n", len(pages))
 }
