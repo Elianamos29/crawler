@@ -2,16 +2,6 @@
 
 Boot.dev challenge: building a web crawler using Go.
 
-## Description
-
-The web crawler traverses websites, collecting and processing data from web pages. It demonstrates the use of Go's concurrency features and HTTP handling capabilities.
-
-## Features
-
-- Crawl web pages starting from a given URL.
-- Extract and display links from the crawled pages.
-- Handle concurrency for efficient crawling.
-
 ## Requirements
 
 - Go 1.20 or later
