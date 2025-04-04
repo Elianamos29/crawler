@@ -8,7 +8,7 @@ import (
 
 type config struct {
 	pages              map[string]int
-	maxPages		   int
+	maxPages           int
 	baseURL            *url.URL
 	mu                 *sync.Mutex
 	concurrencyControl chan struct{}
@@ -18,12 +18,12 @@ type config struct {
 func configure(rawBaseURL string, maxConcurrency, maxPages int) (*config, error) {
 	baseURL, err := url.Parse(rawBaseURL)
 	if err != nil {
-		return nil, fmt.Errorf("couldn't parse base URL: %v", err)
+		return nil, fmt.Errorf("couldn't parse base URL: %v\n", err)
 	}
 
 	return &config{
 		pages:              make(map[string]int),
-		maxPages: 			maxPages,
+		maxPages:           maxPages,
 		baseURL:            baseURL,
 		mu:                 &sync.Mutex{},
 		concurrencyControl: make(chan struct{}, maxConcurrency),
@@ -54,7 +54,7 @@ func (cfg *config) crawlPage(rawCurrentURL string) {
 
 	normalizedCurrentUrL, err := normalizeURL(rawCurrentURL)
 	if err != nil {
-		fmt.Printf("error normaizing url: %v", err)
+		fmt.Printf("error normaizing url: %v\n", err)
 		return
 	}
 
@@ -66,13 +66,13 @@ func (cfg *config) crawlPage(rawCurrentURL string) {
 
 	htmlBody, err := getHTML(rawCurrentURL)
 	if err != nil {
-		fmt.Printf("error getting html: %v", err)
+		fmt.Printf("error getting html: %v\n", err)
 		return
 	}
 
 	nextURLs, err := getURLsFromHTML(htmlBody, cfg.baseURL)
 	if err != nil {
-		fmt.Printf("error getting urls from html: %v", err)
+		fmt.Printf("error getting urls from html: %v\n", err)
 		return
 	}
 

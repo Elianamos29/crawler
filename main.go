@@ -37,12 +37,10 @@ func main() {
 	}
 
 	fmt.Printf("starting crawl of: %s\n", rawBaseURL)
-	
+
 	cfg.wg.Add(1)
 	go cfg.crawlPage(rawBaseURL)
 	cfg.wg.Wait()
 
-	for normalizedURL, count := range cfg.pages {
-		fmt.Printf("%d - %s\n", count, normalizedURL)
-	}
+	printReport(cfg.pages, rawBaseURL)
 }
